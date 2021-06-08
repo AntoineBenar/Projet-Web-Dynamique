@@ -1,5 +1,5 @@
 .section{
-    background-image: url('./img/bibliotheque.jpg');
+    background-image: url('../img/bibliotheque.jpg');
     background-size: cover;
     background-position: center;
     position: relative;
@@ -38,12 +38,11 @@
     left:40%;
     top:70%;
     position: absolute;
-    border: 5px solid blue;
     height: 120px;
 
 }
 .enregistrement{
-    background-image: url('./img/.enregistrement.jpg');
+    background-image: url('../img/bibliotheque.jpg');
     background-size: cover;
     background-position: center;
     position: relative;
