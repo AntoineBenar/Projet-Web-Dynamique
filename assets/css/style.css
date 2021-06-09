@@ -20,10 +20,11 @@
 
 .td{
     color: white;
+    ;
 }
 .article{
     left:40%;
-    top:30%;
+    top:20%;
     position: absolute;
     border: 5px solid blue;
     height: 120px;
@@ -36,7 +37,7 @@
 
 .article2{
     left:40%;
-    top:70%;
+    top:50%;
     position: absolute;
     height: 120px;
 
