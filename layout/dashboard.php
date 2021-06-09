@@ -1,3 +1,12 @@
+<?php
+    //récupérer les données venant de formulaire
+    $titre = isset($_POST["titre"]) ? $_POST["titre"] : "";
+    $auteur = isset($_POST["auteur"]) ? $_POST["auteur"] : "";
+    $editeur = isset($_POST["editeur"]) ? $_POST["editeur"] : "";
+    require '../bdd_livres_connect.php';
+    require '../bdd_user_connect.php';
+    $connexion = null;
+?>
 <html>
     <head>
         <meta charset="utf-8"/>

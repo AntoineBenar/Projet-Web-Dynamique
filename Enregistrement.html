@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script> 
+        
     </head>
     <body>
         <h1> Formulaire d'enregistrement</h1>
@@ -15,12 +16,13 @@
             <navbar></navbar>
           </div>
              
-        <nav class="navbar navbar-expand-md">
-            <div class="logo" href="#"><img src="assets/img/logoavecfond.jpg"></div>
+          <nav class="navbar navbar-expand-md">
+            <div class="logo" href="index.html"><img src="assets/img/logoavecfond.jpg"><a class="nav-link" href= "index.html"></a></div>
             <div class="navbar-left">
-                    <div class = "functions"><div class="nav-item"><a class="nav-link" href="users.php" onclick="users.php">Rôles</a></div></div>
-                    <div class = "functions"><div class="nav-item"><a class="nav-link" href="#">Enregistrements</a></div></div>
-                    <div class = "functions"><div class="nav-item"><a class="nav-link" href="#">Validation</a></div></div> 
+                    <div class = "functions"><div class="nav-item"><a class="nav-link" href="Research.html">Recherche</a></div></div>
+                    <div class = "functions"><div class="nav-item"><a class="nav-link" href="Enregistrement.html">Enregistrements</a></div></div>
+                    <div class = "functions"><div class="nav-item"><a class="nav-link" href="BookList.html">Livres</a></div></div> 
+                    <div class = "functions"><div class="nav-item"><a class="nav-link" href="Approvalpage.html">Validation</a></div></div> 
             </div>
             <div class="navbar-right">
                 <div class = "logs"><div class="nav-item"><a class="nav-link" href="#">Déconnexion</a></div></div>
@@ -28,8 +30,11 @@
         </div>
         </nav>
 
+
+        
+        <form action="layout/creation.php" method="POST">
+            
         <div class=" enregistrement container-fluid">
-            <div class="overlay"></div>
             <article class="article2">
                 
                 <table>
@@ -50,9 +55,13 @@
                         <td><input type="text" name="Editeur"></td>
                     </tr>
                     <tr>
-                        <td class="button"><input type="submit" value="Soumettre" name="button1"/></td>
+                        <td class="button"><input type="submit" value="Enregistrer" name="button1"/></td>
                     </tr>
                     
+                </table>
+                    
         </div>
+        </form>
     </body>
 </html>
+
