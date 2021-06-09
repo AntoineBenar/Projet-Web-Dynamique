@@ -1,5 +1,5 @@
 .section{
-    background-image: url('./img/bibliotheque.jpg');
+    background-image: url('../img/bibliotheque.jpg');
     background-size: cover;
     background-position: center;
     position: relative;
@@ -20,10 +20,11 @@
 
 .td{
     color: white;
+    ;
 }
 .article{
     left:40%;
-    top:30%;
+    top:20%;
     position: absolute;
     border: 5px solid blue;
     height: 120px;
@@ -36,14 +37,13 @@
 
 .article2{
     left:40%;
-    top:70%;
+    top:50%;
     position: absolute;
-    border: 5px solid blue;
     height: 120px;
 
 }
 .enregistrement{
-    background-image: url('./img/.enregistrement.jpg');
+    background-image: url('../img/bibliotheque.jpg');
     background-size: cover;
     background-position: center;
     position: relative;
