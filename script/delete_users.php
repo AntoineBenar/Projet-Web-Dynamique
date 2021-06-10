@@ -75,3 +75,11 @@ function deleteRecord($connexion, $tabFieldValue)
 if (isset($_POST['button3'])) {
     deleteRecord($connexion, $_POST);
  }
+ 
+ function doesContainResult($result){
+    if($result->rowCount() > 0) {
+        return true;
+    }else {
+        return false;
+    }
+}

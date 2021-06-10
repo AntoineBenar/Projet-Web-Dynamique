@@ -1,22 +1,19 @@
 Vue.component('vuenavbar', {
     props: ['Prenom', 'Nom',],
     template: `
-    <div id="navbar">
-        <navbar></navbar>
-      </div>
-         
     <nav class="navbar navbar-expand-md">
-        <div class="logo" href="#"><img src="assets/img/logoavecfond.jpg"></div>
-        <div class="navbar-left">
-                <div class = "functions"><div class="nav-item"><a class="nav-link" href="users.php" onclick="users.php">Rôles</a></div></div>
-                <div class = "functions"><div class="nav-item"><a class="nav-link" href="#">Enregistrements</a></div></div>
-                <div class = "functions"><div class="nav-item"><a class="nav-link" href="#">Validation</a></div></div> 
-        </div>
-        <div class="navbar-right">
-            <div class = "logs"><div class="nav-item"><a class="nav-link" href="#">Déconnexion</a></div></div>
-            <div class = "logs"><div class="nav-item"><a class="nav-link" href="#">User</a></div></div>
+    <div class="logo" href="index.html"><img src="assets/img/logoavecfond.jpg"><a class="nav-link" href= "index.html"></a></div>
+    <div class="navbar-left">
+            <div class = "functions"><div class="nav-item"><a class="nav-link" href="Research.html">Recherche</a></div></div>
+            <div class = "functions"><div class="nav-item"><a class="nav-link" href="Enregistrement.html">Enregistrements</a></div></div>
+            <div class = "functions"><div class="nav-item"><a class="nav-link" href="BookList.php">Livres</a></div></div> 
+            <div class = "functions"><div class="nav-item"><a class="nav-link" href="Approvalpage.html">Validation</a></div></div> 
     </div>
-    </nav>
+    <div class="navbar-right">
+        <div class = "logs"><div class="nav-item"><a class="nav-link" href="deconnexion.html">Déconnexion</a></div></div>
+        <div class = "logs"><div class="nav-item"><a class="nav-link" href="Login.html">Connexion</a></div></div>
+</div>
+</nav>
     `,
     methods: {
         /**
