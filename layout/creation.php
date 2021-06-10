@@ -4,91 +4,70 @@ $date = isset($_POST["date"]) ? $_POST["date"] : "";
 $editeur = isset($_POST["editeur"]) ? $_POST["editeur"] : "";
 $collection = isset($_POST["collection"]) ? $_POST["collection"] : "";
 $edition = isset($_POST["edition"]) ? $_POST["edition"] : "";
-require '../script/bdd_livres_connect.php';
 
+$nomauteur = isset($_POST["nomauteur"]) ? $_POST["nomauteur"] : "";
+$prenomauteur = isset($_POST["prenomauteur"]) ? $_POST["prenomauteur"] : "";
+
+
+require '../script/bdd_livres_connect.php';
+//require '../script/bdd_users_connect.php';
 
 if (isset($_POST['button1'])) {
-    echo "<p> titre = $titre, date = $date,editeur = $editeur, collection = $collection, edition = $edition  </p>";
-    if (!empty($titre) && !empty($date) && !empty($editeur) && !empty($collection) && !empty($edition)) {
+    if (!empty($titre) && !empty($date) && !empty($editeur) && !empty($collection) && !empty($edition) && !empty($nomauteur)&& !empty($prenomauteur)) {
+
+       
+        $sql_insert_auteur = $connexion->prepare("INSERT INTO auteurs (Nom,Prenom)
+        values (:nomauteur, :prenomauteur)");
+        $sql_insert_auteur->bindParam(':nomauteur', $nomauteur);
+        $sql_insert_auteur->bindParam(':prenomauteur', $prenomauteur);
+        $sql_insert_auteur->execute();
 
 
-        $sql_search = "SELECT * FROM LIVRE";
-        $sql_conditions = "";
-        $sql_conditions = addConditionsWithOperator($sql_conditions, "Titre", "=", $titre);
-        $sql_conditions = addConditionsWithOperator($sql_conditions, "Date_Publication", "=", $date);
-        $sql_conditions = addConditionsWithOperator($sql_conditions, "Editeur", "=", $editeur);
-        $sql_conditions = addConditionsWithOperator($sql_conditions, "Collection", "=",  $collection);
-        $sql_conditions = addConditionsWithOperator($sql_conditions, "Edition", "=",  $edition);
-        $sql_search .= $sql_conditions;
-        $result_search = executeQuery($connexion, $sql_search);
-        echo "search : $sql_search: PB ";
+        $sql_insert_livre = $connexion->prepare("INSERT INTO livres(Titre, Date_publication, Editeur, Collection, Edition, Aproval)
+        values (:titre, :date, :editeur, :collection, :edition, 0)");
+        $sql_insert_livre->bindParam(':titre', $titre);
+        $sql_insert_livre->bindParam(':date', $date);
+        $sql_insert_livre->bindParam(':editeur', $editeur);
+        $sql_insert_livre->bindParam(':collection', $collection);
+        $sql_insert_livre->bindParam(':edition', $edition);
+        $sql_insert_livre->execute();
 
-        if ($result_search->rowCount() > 0) {
-            echo "<p> Ce livre existe déjà dans la bibliothèque. </p>";
-        } else {
+        
+        $sql_insert_livreauteur = $connexion->prepare("INSERT INTO livresauteurs (TItre, DateDePublication, NomAuteur, PrenomAuteur)
+        values (:titre, :date, :nomauteur, :prenomauteur)");
+        $sql_insert_livreauteur->bindParam(':titre', $titre);
+        $sql_insert_livreauteur->bindParam(':date', $date);
+        $sql_insert_livreauteur->bindParam(':nomauteur', $nomauteur);
+        $sql_insert_livreauteur->bindParam(':prenomauteur', $prenomauteur);
+        $sql_insert_livreauteur->execute();
 
-            $sql_insert = "INSERT INTO livre(Titre, Date_Publication, Editeur, Collection, Edition, Aproval)
-            VALUES('$titre', '$date', '$editeur', '$collection','$edition', 0)";
+        $titrepageconfirmation = 'Confirmation';
 
-            $result_insert = executeQuery($connexion, $sql_insert);
+        echo <<<MON_HTML
+ 
+        <html>
+            <head>
+                <link  rel="stylesheet" type="text/css" href="assets/css/stylesEnregistrement.css" /> 
+                <title>${titrepageconfirmation}</title>
+            </head>
 
-            $lastId = $connexion->lastInsertId();
-            $sql_search = "SELECT * FROM LIVRE WHERE ID =" . $lastId;
+            <body>
+             titre : $titre, date : $date, editeur : $editeur, <br> collection : $collection, edition : $edition , <br> Nom de l'auteur : $nomauteur,  prénom de l'auteur : $prenomauteur 
+            <h2>Le livre a bien été enregistré.</h2>
+            <button href="Enregistrement.html">retour
+            </button>
+            
+            </body>
+        </html>
+ 
+MON_HTML;
 
-            $result_search = $connexion->query($sql_search);
+    
+        $connexion=null;
 
-            if (!$result_search) {
-                $connexion = null;
-                exit();
-            }
-
-            if ($result_search->rowCount() > 0) {
-                echo "<h2>Dernier enregistrement inséré</h2>";
-                echo "<table>";
-                foreach ($result_search as $row) {
-                    echo "<tr>";
-                    echo "<td>" . $row["Titre"] . "</td>";
-                    echo "<td>" . $row["Auteur"] . "</td>";
-                    echo "<td>" . $row["Annee"] . "</td>";
-                    echo "<td>" . $row["Editeur"] . "</td>";
-                    echo "</tr>";
-                }
-                echo "</table>";
-            } else {
-                echo "<p> Aucun résultats trouvés. </p>";
-            }
+    }
+}
+        else{
+            echo"<p> Problème rencontré</p>";
         }
-    } else {
-        echo "<p>Veuillez remplir tous les champs</p>";
-    }
-    $connexion = null;
-}
-
-function addConditionsWithOperator($sql_conditions, $field, $operator, $value)
-{
-    if (!empty($value)) {
-        if (empty($sql_conditions)) {
-            $sql_conditions .= " WHERE ";
-        } else {
-            $sql_conditions .= " AND ";
-        }
-
-        $sql_conditions .= $field . " " . $operator . " " . '"' . $value . '"';
-    }
-    return $sql_conditions;
-}
-
-function executeQuery($connexion, $sql_query)
-{
-    echo " CON : $connexion";
-    $result_insert = $connexion->query($sql_query);
-    echo "executequery : $result_insert: ";
-
-    if (!$result_insert) {
-        $connexion = null;
-        exit();
-    }
-
-    return $result_insert;
-}
 ?>

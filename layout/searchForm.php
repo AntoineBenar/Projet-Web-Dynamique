@@ -1,16 +1,23 @@
-    <!-- 
-Créez un fichier "searchForm.php" dans le dossier "layout" et faites en sorte d'avoir un formulaire
-de recherche sur les champs de votre table "Livre" qui pointera sur la page courante avec la
-méthode POST.
-Vous vérifierez donc si le bouton de soumission de votre formulaire a été utilisé en vous basant sur
-son nom, et choisirez en conséquence si il faut construire la requête de recherche ou récupérez tous
-les enregistrements pour l'affichage de votre table.
-    -->
-    <?php
+<?php
+$titre = isset($_POST["titre"]) ? $_POST["titre"] : "";
+$date = isset($_POST["date"]) ? $_POST["date"] : "";
+$editeur = isset($_POST["editeur"]) ? $_POST["editeur"] : "";
+$collection = isset($_POST["collection"]) ? $_POST["collection"] : "";
+$edition = isset($_POST["edition"]) ? $_POST["edition"] : "";
 
+$nomauteur = isset($_POST["nomauteur"]) ? $_POST["nomauteur"] : "";
+$prenomauteur = isset($_POST["prenomauteur"]) ? $_POST["prenomauteur"] : "";
+require './/script/bdd_livres_connect.php';
 
-if (isset($_POST['button1'])) {
-    if (!empty($titre) || !empty($auteur) || !empty($annee) || !empty($editeur)) {
+if (isset($_POST['buttonsearch'])) {
+    if (!empty($titre) || !empty($date) || !empty($editeur) || !empty($collection) || !empty($edition) || !empty($nomauteur) || !empty($prenomauteur) ) {
+        
+        /*$sql_search_auteur = $connexion->prepare("SELECT Titre FROM livres WHERE ();
+        values (:nomauteur, :prenomauteur)");
+        $sql_search_auteur->bindParam(':nomauteur', $nomauteur);
+        $sql_search_auteur->bindParam(':prenomauteur', $prenomauteur);
+        $sql_search_auteur->execute();*/
+        
         $sql_search = "SELECT * FROM LIVRE";
         $sql_conditions = "";
         $sql_conditions = addConditions($sql_conditions, "Titre", $titre);
@@ -48,4 +55,30 @@ if (isset($_POST['button1'])) {
         echo "<p>Aucune données transmises par le formulaire.</p>";
     }
 }
+
+function addConditions($sql_conditions, $field, $value)
+{
+    if (!empty($value)) {
+        if (empty($sql_conditions)) {
+            $sql_conditions .= " WHERE ";
+        } else {
+            $sql_conditions .= " AND ";
+        }
+
+        $sql_conditions .= "$field LIKE '%$value%'";
+    }
+    return $sql_conditions;
+}
+function executeQuery($connexion, $sql_query)
+{
+    $result_insert = $connexion->query($sql_query);
+
+    if (!$result_insert) {
+        $connexion = null;
+        exit();
+    }
+
+    return $result_insert;
+}
+
 ?>
