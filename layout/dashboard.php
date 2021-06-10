@@ -3,8 +3,8 @@
     $titre = isset($_POST["titre"]) ? $_POST["titre"] : "";
     $auteur = isset($_POST["auteur"]) ? $_POST["auteur"] : "";
     $editeur = isset($_POST["editeur"]) ? $_POST["editeur"] : "";
-    require '../bdd_connect.php';
-    require '../utils.php';
+    require '../script/bdd_livres_connect.php';
+    require '../script/bdd_users_connect.php';
     $connexion = null;
 ?>
 <html>
