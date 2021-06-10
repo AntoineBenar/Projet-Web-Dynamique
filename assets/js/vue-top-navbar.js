@@ -22,7 +22,6 @@ Vue.component('vuenavbar', {
          */
         onClick: function(event) {
             //deconnexion();
-            alert("POIL")
         
         }
     }

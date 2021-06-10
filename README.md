@@ -2,9 +2,10 @@
 
 * Groupe : 2
 
-* Membres du groupe : - Antonin SAURET 
-                      - Maxime LABE
-                      - Antoine BENAR
+* Membres du groupe :- Antoine BENAR
+                     - Antonin SAURET 
+                     - Maxime LABE
+                      
 
 -----------------------------------------
 
