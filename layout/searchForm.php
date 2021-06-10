@@ -7,7 +7,9 @@ $edition = isset($_POST["edition"]) ? $_POST["edition"] : "";
 
 $nomauteur = isset($_POST["nomauteur"]) ? $_POST["nomauteur"] : "";
 $prenomauteur = isset($_POST["prenomauteur"]) ? $_POST["prenomauteur"] : "";
-require './/script/bdd_livres_connect.php';
+
+
+require '../script/bdd_livres_connect.php';
 
 if (isset($_POST['buttonsearch'])) {
     if (!empty($titre) || !empty($date) || !empty($editeur) || !empty($collection) || !empty($edition) || !empty($nomauteur) || !empty($prenomauteur) ) {
